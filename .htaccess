@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Prevent directory listings
+    Options -Indexes
+    
+    # Handle errors
+    ErrorDocument 404 /index.php
+    
+    # Protect sensitive files
+    <FilesMatch "\.(sql|ini|log)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+    
+    # Protect directories
+    RewriteRule ^(config|includes|models|controllers)/ - [F,L]
+</IfModule>
